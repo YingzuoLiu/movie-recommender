@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# AWS
+.env
+.aws/
+
+# MovieLens Data
+data/raw/ml-100k/
+
+# Package files
+api/boto3/
+api/botocore/
+api/urllib3/
+api/jmespath/
+api/s3transfer/
+api/python_dateutil/
+api/six.py
+api/*.zip
+
+# Logs
+*.log
+
+# Generated files
+tests/*.png
+tests/*.md

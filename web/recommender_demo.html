@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影推荐系统演示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        .movie {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .movie:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .movie h3 {
+            margin-top: 0;
+            color: #2196F3;
+        }
+        .score {
+            color: #ff6600;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            display: none;
+        }
+        .loading:after {
+            content: "...";
+            animation: dots 1s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60% { content: "..."; }
+            80%, 100% { content: ""; }
+        }
+        .error {
+            color: #f44336;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>电影推荐系统演示</h1>
+    
+    <div class="form-group">
+        <label for="userId">用户ID (1-943):</label>
+        <input type="number" id="userId" min="1" max="943" value="1">
+        <button onclick="getRecommendations()">获取推荐</button>
+    </div>
+    
+    <div class="loading" id="loading">
+        <p>加载中</p>
+    </div>
+    
+    <div id="results"></div>
+    
+    <script>
+        // API端点
+        const API_ENDPOINT = "https://ydh03jw2xa.execute-api.ap-southeast-1.amazonaws.com/prod/recommendations/{userId}";
+        
+        // 电影标题映射（将在页面加载时填充）
+        let movieTitles = {};
+        
+        // 页面加载时获取电影数据
+        window.onload = async function() {
+            // 简单起见，我们可以内嵌一些常见的电影ID和标题
+            movieTitles = {
+                1: "Toy Story (1995)",
+                2: "GoldenEye (1995)",
+                3: "Four Rooms (1995)",
+                4: "Get Shorty (1995)",
+                5: "Copycat (1995)",
+                6: "Shanghai Triad (1995)",
+                7: "Twelve Monkeys (1995)",
+                8: "Babe (1995)",
+                9: "Dead Man Walking (1995)",
+                10: "Richard III (1995)",
+                66: "Leaving Las Vegas (1995)",
+                111: "Taxi Driver (1976)",
+                173: "Friday (1995)",
+                202: "Alien (1979)",
+                210: "Wild Bill (1995)",
+                274: "Singin' in the Rain (1952)",
+                692: "Silence of the Lambs, The (1991)",
+                739: "Craft, The (1996)",
+                // 可以添加更多电影
+            };
+        };
+        
+        async function getRecommendations() {
+            const userId = document.getElementById('userId').value;
+            if (!userId) {
+                alert('请输入用户ID');
+                return;
+            }
+            
+            const apiEndpoint = API_ENDPOINT.replace("{userId}", userId);
+            
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            
+            loading.style.display = 'block';
+            results.innerHTML = '';
+            
+            try {
+                const response = await fetch(apiEndpoint);
+                const data = await response.json();
+                
+                loading.style.display = 'none';
+                
+                if (data.recommendations && data.recommendations.length > 0) {
+                    let html = `<h2>用户 ${userId} 的电影推荐</h2>`;
+                    
+                    data.recommendations.forEach((movie, index) => {
+                        const itemId = movie.itemId;
+                        const score = movie.score;
+                        // 尝试获取电影标题，如果没有则使用ID
+                        const title = movieTitles[itemId] || `电影 ${itemId}`;
+                        
+                        html += `
+                            <div class="movie">
+                                <h3>${index + 1}. ${title}</h3>
+                                <p>物品ID: ${itemId}</p>
+                                <p>推荐分数: <span class="score">${parseFloat(score).toFixed(4)}</span></p>
+                            </div>
+                        `;
+                    });
+                    
+                    results.innerHTML = html;
+                } else {
+                    results.innerHTML = '<p>没有找到推荐结果</p>';
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                results.innerHTML = `<p class="error">获取推荐时出错: ${error.message}</p>`;
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1000" height="700" fill="#f8f9fa" />
+  
+  <!-- 标题 -->
+  <text x="500" y="30" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">AWS Personalize 电影推荐系统架构</text>
+  
+  <!-- 层次标签 -->
+  <rect x="30" y="70" width="25" height="130" rx="5" fill="#d1e7ff" />
+  <text x="42.5" y="140" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(-90, 42.5, 140)">数据层</text>
+  
+  <rect x="30" y="210" width="25" height="130" rx="5" fill="#d7f4d7" />
+  <text x="42.5" y="280" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(-90, 42.5, 280)">模型层</text>
+  
+  <rect x="30" y="350" width="25" height="130" rx="5" fill="#ffe8d1" />
+  <text x="42.5" y="420" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(-90, 42.5, 420)">服务层</text>
+  
+  <rect x="30" y="490" width="25" height="130" rx="5" fill="#f0e6ff" />
+  <text x="42.5" y="560" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(-90, 42.5, 560)">客户层</text>
+  
+  <!-- 数据层组件 -->
+  <rect x="80" y="70" width="180" height="60" rx="5" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" />
+  <text x="170" y="105" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">MovieLens 100K</text>
+  
+  <rect x="320" y="70" width="180" height="60" rx="5" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" />
+  <text x="410" y="95" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">数据预处理</text>
+  <text x="410" y="115" font-family="Arial" font-size="12" text-anchor="middle">清洗 + 特征工程 + 转换</text>
+  
+  <rect x="560" y="70" width="180" height="60" rx="5" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" />
+  <text x="650" y="95" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Amazon S3</text>
+  <text x="650" y="115" font-family="Arial" font-size="12" text-anchor="middle">数据存储</text>
+  
+  <!-- 数据层数据流 -->
+  <path d="M260 100 L320 100" stroke="#2196f3" stroke-width="2" fill="none" marker-end="url(#blue-arrow)" />
+  <path d="M500 100 L560 100" stroke="#2196f3" stroke-width="2" fill="none" marker-end="url(#blue-arrow)" />
+  
+  <!-- 模型层组件 -->
+  <rect x="80" y="210" width="180" height="60" rx="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="170" y="235" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Personalize 数据集</text>
+  <text x="170" y="255" font-family="Arial" font-size="12" text-anchor="middle">交互 + 物品数据</text>
+  
+  <rect x="320" y="210" width="180" height="60" rx="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="410" y="235" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">解决方案配置</text>
+  <text x="410" y="255" font-family="Arial" font-size="12" text-anchor="middle">user-personalization配方</text>
+  
+  <rect x="560" y="210" width="180" height="60" rx="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="650" y="235" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">解决方案版本</text>
+  <text x="650" y="255" font-family="Arial" font-size="12" text-anchor="middle">训练完成的模型</text>
+  
+  <rect x="800" y="210" width="180" height="60" rx="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="890" y="235" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">模型评估</text>
+  <text x="890" y="255" font-family="Arial" font-size="12" text-anchor="middle">precision, recall, NDCG</text>
+  
+  <!-- 模型层数据流 -->
+  <path d="M570 130 L170 210" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#green-arrow)" />
+  <path d="M260 240 L320 240" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#green-arrow)" />
+  <path d="M500 240 L560 240" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#green-arrow)" />
+  <path d="M740 240 L800 240" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#green-arrow)" />
+  
+  <!-- 服务层组件 -->
+  <rect x="80" y="350" width="180" height="60" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="170" y="375" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Personalize 市场活动</text>
+  <text x="170" y="395" font-family="Arial" font-size="12" text-anchor="middle">实时推荐服务</text>
+  
+  <rect x="320" y="350" width="180" height="60" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="410" y="375" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Lambda 函数</text>
+  <text x="410" y="395" font-family="Arial" font-size="12" text-anchor="middle">API实现</text>
+  
+  <rect x="560" y="350" width="180" height="60" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="650" y="375" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">API Gateway</text>
+  <text x="650" y="395" font-family="Arial" font-size="12" text-anchor="middle">REST API接口</text>
+  
+  <rect x="800" y="350" width="180" height="60" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="890" y="375" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">批量推荐服务</text>
+  <text x="890" y="395" font-family="Arial" font-size="12" text-anchor="middle">(成本优化选项)</text>
+  
+  <!-- 服务层数据流 -->
+  <path d="M650 270 L170 350" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#orange-arrow)" />
+  <path d="M260 380 L320 380" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#orange-arrow)" />
+  <path d="M500 380 L560 380" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#orange-arrow)" />
+  <path d="M650 270 L890 350" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#orange-arrow)" />
+  
+  <!-- 客户层组件 -->
+  <rect x="80" y="490" width="180" height="60" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" />
+  <text x="170" y="515" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Web演示界面</text>
+  <text x="170" y="535" font-family="Arial" font-size="12" text-anchor="middle">HTML/CSS/JS</text>
+  
+  <rect x="320" y="490" width="180" height="60" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" />
+  <text x="410" y="515" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">API测试脚本</text>
+  <text x="410" y="535" font-family="Arial" font-size="12" text-anchor="middle">性能测试</text>
+  
+  <rect x="560" y="490" width="180" height="60" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" />
+  <text x="650" y="515" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">评估工具</text>
+  <text x="650" y="535" font-family="Arial" font-size="12" text-anchor="middle">质量监控</text>
+  
+  <!-- 客户层数据流 -->
+  <path d="M650 410 L170 490" stroke="#9c27b0" stroke-width="2" fill="none" marker-end="url(#purple-arrow)" />
+  <path d="M650 410 L410 490" stroke="#9c27b0" stroke-width="2" fill="none" marker-end="url(#purple-arrow)" />
+  <path d="M650 410 L650 490" stroke="#9c27b0" stroke-width="2" fill="none" marker-end="url(#purple-arrow)" />
+  
+  <!-- 监控和日志系统 -->
+  <rect x="80" y="600" width="900" height="60" rx="5" fill="#eeeeee" stroke="#757575" stroke-width="2" />
+  <text x="530" y="635" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">CloudWatch 监控 + IAM 权限管理 + 资源清理</text>
+  
+  <!-- 连接监控和日志系统 -->
+  <path d="M170 550 L170 600" stroke="#757575" stroke-width="1.5" stroke-dasharray="5,5" />
+  <path d="M410 550 L410 600" stroke="#757575" stroke-width="1.5" stroke-dasharray="5,5" />
+  <path d="M650 550 L650 600" stroke="#757575" stroke-width="1.5" stroke-dasharray="5,5" />
+  <path d="M890 410 L890 600" stroke="#757575" stroke-width="1.5" stroke-dasharray="5,5" />
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2196f3"/>
+    </marker>
+    <marker id="green-arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4caf50"/>
+    </marker>
+    <marker id="orange-arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff9800"/>
+    </marker>
+    <marker id="purple-arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9c27b0"/>
+    </marker>
+  </defs>
+  
+  <!-- 离线流程和在线流程标签 -->
+  <rect x="20" y="160" width="120" height="25" rx="5" fill="#e0e0e0" stroke="#757575" stroke-width="1" />
+  <text x="80" y="177" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">离线训练流程</text>
+  
+  <rect x="20" y="430" width="120" height="25" rx="5" fill="#e0e0e0" stroke="#757575" stroke-width="1" />
+  <text x="80" y="447" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">在线预测流程</text>
+</svg>
